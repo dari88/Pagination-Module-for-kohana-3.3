@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -30,29 +31,33 @@
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Paginator_Scrollingstyle_Elastic extends Paginator_Scrollingstyle_Sliding
-{
-    /**
-     * Returns an array of "local" pages given a page number and range.
-     *
-     * @param  Paginator $paginator
-     * @param  integer $page_Range Unused
-     * @return array
-     */
-    public function get_Pages(Paginator $paginator, $page_Range = null)
-    {
-        $page_Range  = $paginator->get_Page_Range();
-        $page_Number = $paginator->get_Current_Page_Number();
+class Paginator_Scrollingstyle_Elastic extends Paginator_Scrollingstyle_Sliding {
 
-        $original_Page_Range = $page_Range;
-        $page_Range         = $page_Range * 2 - 1;
+	/**
+	 * Returns an array of "local" pages given a page number and range.
+	 *
+	 * @param  Paginator $paginator
+	 * @param  integer $page_range Unused
+	 * @return array
+	 */
+	public function get_pages(Paginator $paginator, $page_range = null)
+	{
+		$page_range = $paginator->get_page_range();
+		$page_number = $paginator->get_current_page_number();
 
-        if ($original_Page_Range + $page_Number - 1 < $page_Range) {
-            $page_Range = $original_Page_Range + $page_Number - 1;
-        } else if ($original_Page_Range + $page_Number - 1 > count($paginator)) {
-            $page_Range = $original_Page_Range + count($paginator) - $page_Number;
-        }
+		$original_page_range = $page_range;
+		$page_range = $page_range * 2 - 1;
 
-        return parent::get_Pages($paginator, $page_Range);
-    }
+		if ($original_page_range + $page_number - 1 < $page_range)
+		{
+			$page_range = $original_page_range + $page_number - 1;
+		}
+		else if ($original_page_range + $page_number - 1 > count($paginator))
+		{
+			$page_range = $original_page_range + count($paginator) - $page_number;
+		}
+
+		return parent::get_pages($paginator, $page_range);
+	}
+
 }

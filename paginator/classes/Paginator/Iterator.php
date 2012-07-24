@@ -28,59 +28,64 @@
  */
 class Paginator_Iterator implements Countable {
 
-    /**
-     * Iterator which implements Countable
-     *
-     * @var Iterator
-     */
-    protected $_iterator = null;
+	/**
+	 * Iterator which implements Countable
+	 *
+	 * @var Iterator
+	 */
+	protected $_iterator = null;
 
-    /**
-     * Item count
-     *
-     * @var integer
-     */
-    protected $_count = null;
+	/**
+	 * Item count
+	 *
+	 * @var integer
+	 */
+	protected $_count = null;
 
-    /**
-     * Constructor.
-     *
-     * @param  Iterator $iterator Iterator to paginate
-     * @throws Paginator_Exception
-     */
-    public function __construct(Iterator $iterator) {
-        if (!$iterator instanceof Countable) {
-            throw new Exception('Iterator must implement Countable');
-        }
+	/**
+	 * Constructor.
+	 *
+	 * @param  Iterator $iterator Iterator to paginate
+	 * @throws Paginator_Exception
+	 */
+	public function __construct(Iterator $iterator)
+	{
+		if ( ! $iterator instanceof Countable)
+		{
+			throw new Exception('Iterator must implement Countable');
+		}
 
-        $this->_iterator = $iterator;
-        $this->_count = count($iterator);
-    }
+		$this->_iterator = $iterator;
+		$this->_count = count($iterator);
+	}
 
-    /**
-     * Returns an iterator of items for a page, or an empty array.
-     *
-     * @param  integer $offset Page offset
-     * @param  integer $item_Count_Per_Page Number of items per page
-     * @return LimitIterator|array
-     */
-    public function get_Items($offset, $item_Count_Per_Page) {
-        if ($this->_count == 0) {
-            return array();
-        }
+	/**
+	 * Returns an iterator of items for a page, or an empty array.
+	 *
+	 * @param  integer $offset Page offset
+	 * @param  integer $item_count_per_page Number of items per page
+	 * @return LimitIterator|array
+	 */
+	public function get_items($offset, $item_count_per_page)
+	{
+		if ($this->_count == 0)
+		{
+			return array();
+		}
 
-        // @link http://bugs.php.net/bug.php?id=49906 | ZF-8084
-        // return new LimitIterator($this->_iterator, $offset, $item_Count_Per_Page);
-        return new Paginator_Serializablelimititerator($this->_iterator, $offset, $item_Count_Per_Page);
-    }
+		// @link http://bugs.php.net/bug.php?id=49906 | ZF-8084
+		// return new LimitIterator($this->_iterator, $offset, $item_count_per_page);
+		return new Paginator_Serializablelimititerator($this->_iterator, $offset, $item_count_per_page);
+	}
 
-    /**
-     * Returns the total number of rows in the collection.
-     *
-     * @return integer
-     */
-    public function count() {
-        return $this->_count;
-    }
+	/**
+	 * Returns the total number of rows in the collection.
+	 *
+	 * @return integer
+	 */
+	public function count()
+	{
+		return $this->_count;
+	}
 
 }

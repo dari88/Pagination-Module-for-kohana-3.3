@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -29,30 +30,32 @@
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Paginator_Scrollingstyle_Jumping implements Paginator_Scrollingstyle_Interface
-{
-    /**
-     * Returns an array of "local" pages given a page number and range.
-     *
-     * @param  Paginator $paginator
-     * @param  integer $page_Range Unused
-     * @return array
-     */
-    public function get_Pages(Paginator $paginator, $page_Range = null)
-    {
-        $page_Range  = $paginator->get_Page_Range();
-        $page_Number = $paginator->get_Current_Page_Number();
+class Paginator_Scrollingstyle_Jumping implements Paginator_Scrollingstyle_Interface {
 
-        $delta = $page_Number % $page_Range;
+	/**
+	 * Returns an array of "local" pages given a page number and range.
+	 *
+	 * @param  Paginator $paginator
+	 * @param  integer $page_range Unused
+	 * @return array
+	 */
+	public function get_pages(Paginator $paginator, $page_range = null)
+	{
+		$page_range = $paginator->get_page_range();
+		$page_number = $paginator->get_current_page_number();
 
-        if ($delta == 0) {
-            $delta = $page_Range;
-        }
+		$delta = $page_number % $page_range;
 
-        $offset     = $page_Number - $delta;
-        $lower_Bound = $offset + 1;
-        $upper_Bound = $offset + $page_Range;
+		if ($delta == 0)
+		{
+			$delta = $page_range;
+		}
 
-        return $paginator->get_Pages_In_Range($lower_Bound, $upper_Bound);
-    }
+		$offset = $page_number - $delta;
+		$lower_bound = $offset + 1;
+		$upper_bound = $offset + $page_range;
+
+		return $paginator->get_pages_in_range($lower_bound, $upper_bound);
+	}
+
 }

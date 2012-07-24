@@ -1,7 +1,13 @@
 Very convenient Pagination Module for kohana 3.3
 ================================================
 
-This VPM is codes modification of Zend Paginator. It's input is Database_MySQL_Result, output is paginator and rendered view of pagination. It's very convenient!
+V1.1 (2012/07/24)
+--------------------
+
+- Followed kohana's coding style written in kohana 3.2 user guide "Conventions and Coding Style".
+- The method name was changed to lower case except for the name derived from the core PHP.
+
+This VPM is codes modification of Zend Paginator. It's input is `Database_MySQL_Result`, output is paginator and rendered view of pagination. It's very convenient!
 
 Most simple usage:
 ------------------
@@ -13,7 +19,7 @@ Most simple usage:
     $model = Model::factory('test12_posts');
     $select = $model->selectblogs($array);
     $paginator = Paginator::factory($select);
-    $paginator->set_Current_Page_Number($page);
+    $paginator->set_current_page_number($page);
     $view = View::factory('test12/edit/posts');
     $view->data = $paginator;
     $view->pagination = $paginator->render();
@@ -21,22 +27,22 @@ Most simple usage:
     // View
     <?PHP
            foreach ($data as $d) {
-               echo $d['post_title']."<br />";
+               echo $d['post_title'];
            }
            echo $pagination;
     ?>
 
 Options for example:
 --------------------
-    $paginator->set_Option_Queries('http://example.com/kohana', 'PageNumber', 'option=draft');
-    $paginator->set_Item_Count_Per_Page(30);  // Default = 10
+    $paginator->set_option_queries('http://example.com/kohana', 'PageNumber', 'option=draft');
+    $paginator->set_item_count_per_page(30);  // Default = 10
     $paginator->render('Elastic');  // Scrolling style
     $pagecount = $paginator->count();
 
 Install:
 --------
-* Download and copy paginator folder under `kohana/modules/` folder.
-* Edit your `bootstrap.php` file and add next line.
+* Download and copy paginator folder under kohana/modules/ folder.
+* Edit your bootstrap.php file and add next line.
 * `'paginator'  => MODPATH.'paginator',`
 
 View file can be modified:
@@ -46,36 +52,37 @@ View file can be modified:
 
 Methods:
 --------
-    clear_Page_Item_Cache($page_Number = null)
+    clear_page_item_cache($page_number = null)
     count()
     factory($data)
-    get_Absolute_Item_Number($relative_Item_Number, $page_Number = null)
-    get_Adapter()
-    get_Current_Item_Count()
-    get_Current_Items()
-    get_Current_Page_Number()
-    get_Default_Item_Count_Per_Page()
-    get_Default_Page_Range()
-    get_Default_Scrolling_Style()
-    get_Item($item_Number, $page_Number = null)
-    get_Item_Count($items)
-    get_Item_Count_Per_Page()
-    get_Items_By_Page($page_Number)
-    get_Page_Item_Cache()
-    get_Page_Range()
-    get_Pages($scrolling_Style = null)
-    get_Pages_In_Range($lower_Bound, $upper_Bound)
-    get_Total_Item_Count()
+    get_absolute_item_number($relative_item_number, $page_number = null)
+    get_adapter()
+    get_current_item_count()
+    get_current_items()
+    get_current_page_number()
+    get_default_item_count_per_page()
+    get_default_page_range()
+    get_default_scrolling_style()
+    get_item($item_number, $page_number = null)
+    get_item_count($items)
+    get_item_count_per_page()
+    get_items_by_page($page_number)
+    get_page_item_cache()
+    get_page_range()
+    get_pages($scrolling_style = null)
+    get_pages_in_range($lower_bound, $upper_bound)
+    get_total_item_count()
     getIterator()
-    normalize_Item_Number($item_Number)
-    normalize_Page_Number($page_Number)
-    render($scrolling_Style = null)
-    set_Cache(Cache_Core $cache)
-    set_Cache_Enabled($enable)
-    set_Current_Page_Number($page_Number)
-    set_Default_Item_Count_Per_Page($count)
-    set_Default_Page_Range($count)
-    set_Default_Scrolling_Style($scrolling_Style = 'Sliding')
-    set_Item_Count_Per_Page($item_Count_Per_Page = -1)
-    set_Option_Queries($url = null, $page_Query_Name = null, $option_Query = null)
-    set_Page_Range($page_Range)
+    normalize_item_number($item_number)
+    normalize_page_number($page_number)
+    render($scrolling_style = null)
+    set_cache(cache_core $cache)
+    set_cache_enabled($enable)
+    set_current_page_number($page_number)
+    set_default_item_count_per_page($count)
+    set_default_page_range($count)
+    set_default_scrolling_style($scrolling_style = 'Sliding')
+    set_item_count_per_page($item_count_per_page = -1)
+    set_option_queries($url = null, $page_query_name = null, $option_query = null)
+    set_page_range($page_range)
+

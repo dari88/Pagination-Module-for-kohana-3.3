@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -29,17 +30,18 @@
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Paginator_Scrollingstyle_All implements Paginator_Scrollingstyle_Interface
-{
-    /**
-     * Returns an array of all pages given a page number and range.
-     *
-     * @param  Paginator $paginator
-     * @param  integer $page_Range Unused
-     * @return array
-     */
-    public function get_Pages(Paginator $paginator, $page_Range = null)
-    {
-        return $paginator->get_Pages_In_Range(1, $paginator->count());
-    }
+class Paginator_Scrollingstyle_All implements Paginator_Scrollingstyle_Interface {
+
+	/**
+	 * Returns an array of all pages given a page number and range.
+	 *
+	 * @param  Paginator $paginator
+	 * @param  integer $page_range Unused
+	 * @return array
+	 */
+	public function get_pages(Paginator $paginator, $page_range = null)
+	{
+		return $paginator->get_pages_in_range(1, $paginator->count());
+	}
+
 }

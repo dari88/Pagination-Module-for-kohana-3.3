@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -31,43 +32,50 @@
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Paginator_Scrollingstyle_Sliding implements Paginator_Scrollingstyle_Interface
-{
-    /**
-     * Returns an array of "local" pages given a page number and range.
-     *
-     * @param  Paginator $paginator
-     * @param  integer $page_Range (Optional) Page range
-     * @return array
-     */
-    public function get_Pages(Paginator $paginator, $page_Range = null)
-    {
-        if ($page_Range === null) {
-            $page_Range = $paginator->get_Page_Range();
-        }
+class Paginator_Scrollingstyle_Sliding implements Paginator_Scrollingstyle_Interface {
 
-        $page_Number = $paginator->get_Current_Page_Number();
-        $page_Count  = count($paginator);
+	/**
+	 * Returns an array of "local" pages given a page number and range.
+	 *
+	 * @param  Paginator $paginator
+	 * @param  integer $page_range (Optional) Page range
+	 * @return array
+	 */
+	public function get_pages(Paginator $paginator, $page_range = null)
+	{
+		if ($page_range === null)
+		{
+			$page_range = $paginator->get_page_range();
+		}
 
-        if ($page_Range > $page_Count) {
-            $page_Range = $page_Count;
-        }
+		$page_number = $paginator->get_current_page_number();
+		$page_count = count($paginator);
 
-        $delta = ceil($page_Range / 2);
+		if ($page_range > $page_count)
+		{
+			$page_range = $page_count;
+		}
 
-        if ($page_Number - $delta > $page_Count - $page_Range) {
-            $lower_Bound = $page_Count - $page_Range + 1;
-            $upper_Bound = $page_Count;
-        } else {
-            if ($page_Number - $delta < 0) {
-                $delta = $page_Number;
-            }
+		$delta = ceil($page_range / 2);
 
-            $offset     = $page_Number - $delta;
-            $lower_Bound = $offset + 1;
-            $upper_Bound = $offset + $page_Range;
-        }
+		if ($page_number - $delta > $page_count - $page_range)
+		{
+			$lower_bound = $page_count - $page_range + 1;
+			$upper_bound = $page_count;
+		}
+		else
+		{
+			if ($page_number - $delta < 0)
+			{
+				$delta = $page_number;
+			}
 
-        return $paginator->get_Pages_In_Range($lower_Bound, $upper_Bound);
-    }
+			$offset = $page_number - $delta;
+			$lower_bound = $offset + 1;
+			$upper_bound = $offset + $page_range;
+		}
+
+		return $paginator->get_pages_in_range($lower_bound, $upper_bound);
+	}
+
 }
